@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { urlsHelper } from '../../common/urlsHelper';
 import { getData } from '../../store/actions/movieActions';
 
 import MoviesList from './MoviesList';
@@ -9,8 +10,8 @@ import ContentWrapper from '../ContentWrapper';
 
 class MoviesListContainer extends Component {
     componentDidMount = () => {
-        const url = '/movie/top_rated';
-        this.props.getData(url, { ...this.props });
+        const url = urlsHelper.TOP_RATED;
+        this.props.getData(url);
     };
 
     render() {

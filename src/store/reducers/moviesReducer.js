@@ -7,6 +7,10 @@ const initialState = {
         data: null,
         ...fetchingState,
     },
+    getRecommendationsStatus: {
+        data: null,
+        ...fetchingState,
+    },
 };
 
 const executeGetDataFetching = state => {
@@ -19,11 +23,32 @@ const executeGetDataFetching = state => {
          }
     }
 };
+
 const executeGetDataSuccess = (state, action) => {
-    console.log(action);
     return {
         ...state,
         topRatedMoviesStatus: {
+            data: action.data,
+            isFetching: false,
+            isFetched: true,
+        }
+    }
+};
+
+const executeGetRecommendationsFetching = state => {
+    return {
+        ...state,
+        getRecommendationsStatus: {
+            ...state.getRecommendationsStatus.data,
+             isFetching: true,
+             isFetched: false,
+         }
+    }
+};
+const executeGetRecommendationsSuccess = (state, action) => {
+    return {
+        ...state,
+        getRecommendationsStatus: {
             data: action.data,
             isFetching: false,
             isFetched: true,
@@ -37,6 +62,10 @@ const moviesReducer = (state = initialState, action) => {
             return executeGetDataFetching(state);
         case actionTypes.GET_DATA_SUCCESS:
             return executeGetDataSuccess(state, action);
+        case actionTypes.GET_RECOMMENDATIONS_FETCHING:
+            return executeGetRecommendationsFetching(state);
+        case actionTypes.GET_RECOMMENDATIONS_SUCCESS:
+            return executeGetRecommendationsSuccess(state, action);
         default:
             return state;
     }
