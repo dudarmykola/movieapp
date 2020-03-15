@@ -5,6 +5,7 @@ import { getData } from '../../store/actions/movieActions';
 
 import MoviesList from './MoviesList';
 import ContentLoader from '../ContentLoader';
+import ContentWrapper from '../ContentWrapper';
 
 class MoviesListContainer extends Component {
     componentDidMount = () => {
@@ -19,10 +20,10 @@ class MoviesListContainer extends Component {
             topRatedMovies,
         } = this.props;
         return (
-            <div>
+            <ContentWrapper>
                 { isFetching && <ContentLoader /> }
                 { !isFetching && isFetched && <MoviesList movies={topRatedMovies}/> }
-            </div>
+            </ContentWrapper>
         );
     }
 }
