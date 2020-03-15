@@ -1,5 +1,7 @@
 import * as actionTypes from './actionTypes';
-import axios from '../../axios';
+import {
+    movieApi
+} from '../../axios/axios';
 
 const getDataFetching = () => {
     return {
@@ -13,13 +15,38 @@ const getDataSuccess = (data) => {
         data: data
     }
 };
+const getRecommendationsFetching = () => {
+    return {
+        type: actionTypes.GET_RECOMMENDATIONS_FETCHING,
+    }
+};
 
-export const getData = (url, props) => {
+const getRecommendationsSuccess = (data) => {
+    return {
+        type: actionTypes.GET_RECOMMENDATIONS_SUCCESS,
+        data: data
+    }
+};
+
+export const getData = (url) => {
     return (dispatch) => {
         dispatch(getDataFetching());
-        axios.get(url)
+        movieApi.get(url)
             .then(response => {
                 dispatch(getDataSuccess(response.data.results));
+            })
+            .catch(error => {
+                //TODO: handle the error when implemented
+            })
+    }
+};
+
+export const getRecommendations = (movieId) => {
+    return (dispatch) => {
+        dispatch(getRecommendationsFetching());
+        movieApi.get(`/movie/${movieId}/recommendations`)
+            .then(response => {
+                dispatch(getRecommendationsSuccess(response.data.results));
             })
             .catch(error => {
                 //TODO: handle the error when implemented

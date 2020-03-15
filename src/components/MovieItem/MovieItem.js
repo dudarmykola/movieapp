@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MovieItem = ({movie}) => {
+const MovieItem = ({movie, onItemClick}) => {
     const {
         popularity,
         vote_count,
@@ -18,7 +18,7 @@ const MovieItem = ({movie}) => {
         release_date,
     } = movie;
     return (
-        <ul>
+        <ul onClick={onItemClick}>
             <li>{`popularity: ${popularity}`}</li>
             <li>{`vote_count: ${vote_count}`}</li>
             <li>{`video: ${video}`}</li>
