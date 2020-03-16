@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import {
     Grid,
@@ -25,8 +24,8 @@ const NotFound = () => {
     return (
         <div className={classes.root}>
             <Grid container justify="center">
-                <Grid container xs='12' lg='6' justify='column' alignItems='center'>
-                    <Grid container xs='12' justify='center'>
+                <Grid container xs= {12} lg= {6} justify='column' alignItems='center'>
+                    <Grid container xs= {12} justify='center'>
                         <img className={classes.img} src="/404.png" alt="Error"/>
                     </Grid>
                     <Grid container direction='row' justify='center' className={classes.btn}>
