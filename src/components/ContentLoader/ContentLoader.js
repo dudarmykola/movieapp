@@ -2,21 +2,28 @@ import React from 'react';
 
 import { Skeleton } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles({
-    root: {
-        width: '100%',
+    item: {
+        padding: 16,
     },
 });
 
 const ContentLoader = () => {
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <Skeleton animation='wave' />
-            <Skeleton animation='wave' />
-            <Skeleton animation='wave' />
-        </div>
+        <>
+            <Grid item xs='12' md='4' lg='3' className={classes.item}>
+                <Skeleton variant="rect" width={'100%'} height={200} />
+            </Grid>
+            <Grid item xs='12' md='4' lg='3' className={classes.item}>
+                <Skeleton variant="rect" width={'100%'} height={200} />
+            </Grid>
+            <Grid item xs='12' md='4' lg='3' className={classes.item}>
+                <Skeleton variant="rect" width={'100%'} height={200} />
+            </Grid>
+        </>
     );
 };
 

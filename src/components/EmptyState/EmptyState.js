@@ -1,10 +1,11 @@
 import React from 'react';
+import { Grid } from "@material-ui/core";
 
 const EmptyState = () => {
     return (
-        <div>
-            Nothing found
-        </div>
+        <Grid item >
+            <img src="/searchEmptyState.png" alt="Empty"/>
+        </Grid>
     );
 };
 

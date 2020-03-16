@@ -16,14 +16,21 @@ class MoviesListContainer extends Component {
 
     render() {
         const {
-            isFetched,
             isFetching,
+            searchItems,
+            searchQuery,
+            isFetchedTop,
             topRatedMovies,
+            isFetchedSearch,
         } = this.props;
         return (
             <ContentWrapper>
                 { isFetching && <ContentLoader /> }
-                { !isFetching && isFetched && <MoviesList movies={topRatedMovies}/> }
+                {
+                    !isFetching
+                    && (isFetchedTop || isFetchedSearch)
+                    && <MoviesList topRated={topRatedMovies} searchItems={searchItems} searchQuery={searchQuery}/>
+                }
             </ContentWrapper>
         );
     }
@@ -32,13 +39,17 @@ class MoviesListContainer extends Component {
 const mapStateToProps = (state) => {
     const moviesState = state.movies;
     const {
-        topRatedMoviesStatus
+        searchItemsStatus,
+        topRatedMoviesStatus,
     } = moviesState;
 
     return {
+        searchItems: searchItemsStatus.data,
+        searchQuery: searchItemsStatus.query,
         topRatedMovies: topRatedMoviesStatus.data,
-        isFetching: topRatedMoviesStatus.isFetching,
-        isFetched: topRatedMoviesStatus.isFetched
+        isFetching: topRatedMoviesStatus.isFetching || searchItemsStatus.isFetching,
+        isFetchedTop: topRatedMoviesStatus.isFetched,
+        isFetchedSearch: searchItemsStatus.isFetched,
     }
 };
 
