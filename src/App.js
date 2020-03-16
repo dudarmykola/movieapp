@@ -7,7 +7,6 @@ import {
 
 import MoviesList from './components/MoviesList';
 import NotFound from './components/NotFound';
-import './App.css';
 
 function App() {
     return (
