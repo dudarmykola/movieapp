@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import Header from '../Header';
@@ -25,11 +24,11 @@ const ContentWrapper = (props) => {
         <>
             <Header />
             <div className={classes.root}>
-                <Grid container justify="center">
-                    <Grid item xs={6}>
-                        <Paper className={classes.paper}>
+                <Grid container justify="center" wrap="wrap">
+                    <Grid item xs={12} md={10} lg={8}>
+                        <Grid container justify={"center"} direction={"row"} wrap={"wrap"}>
                             {props.children}
-                        </Paper>
+                        </Grid>
                     </Grid>
                 </Grid>
             </div>

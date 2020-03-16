@@ -2,9 +2,10 @@ import React from 'react';
 
 import Modal from '../Modal';
 import MovieCard from '../MovieCard';
+import EmptyState from '../EmptyState';
 import MovieItem from '../MovieItem/MovieItem';
 
-const MoviesList = ({ movies }) => {
+const MoviesList = ({ topRated, searchItems, searchQuery }) => {
     const [openItem, setOpenItem] = React.useState({
         open: false,
         selected: null
@@ -32,13 +33,23 @@ const MoviesList = ({ movies }) => {
 
     return (
         <>
-            {movies.map((item, index) => (
-                <MovieItem
-                    key={index}
-                    movie={item}
-                    onItemClick={() => handleClickOpen(item)}
-                />
-            ))}
+                {searchQuery !== '' && !searchItems.length
+                    ? <EmptyState />
+                    : searchItems.map((searchItem, index) => (
+                        <MovieItem
+                            key={index}
+                            movie={searchItem}
+                            onItemClick={() => handleClickOpen(searchItem)}
+                        />
+                    ))
+                }
+                {searchQuery === '' && !searchItems.length && topRated.map((item, index) => (
+                    <MovieItem
+                        key={index}
+                        movie={item}
+                        onItemClick={() => handleClickOpen(item)}
+                    />
+                ))}
             <Modal
                 open={openItem.open}
                 handleClose={handleClose}

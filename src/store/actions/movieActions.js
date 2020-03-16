@@ -2,6 +2,7 @@ import * as actionTypes from './actionTypes';
 import {
     movieApi
 } from '../../axios/axios';
+import {urlsHelper} from "../../common/urlsHelper";
 
 const getDataFetching = () => {
     return {
@@ -28,6 +29,21 @@ const getRecommendationsSuccess = (data) => {
     }
 };
 
+const getSearchItemsFetching = (query) => {
+    return {
+        type: actionTypes.GET_SEARCH_FETCHING,
+        query
+    }
+};
+
+const getSearchItemsSuccess = (data, query) => {
+    return {
+        type: actionTypes.GET_SEARCH_SUCCESS,
+        data: data,
+        query
+    }
+};
+
 export const getData = (url) => {
     return (dispatch) => {
         dispatch(getDataFetching());
@@ -51,5 +67,25 @@ export const getRecommendations = (movieId) => {
             .catch(error => {
                 //TODO: handle the error when implemented
             })
+    }
+};
+export const getSearchItems= (query) => {
+    return (dispatch) => {
+        if (query !== '') {
+            dispatch(getSearchItemsFetching(query));
+            movieApi.get(urlsHelper.SEARCH_MOVIE, {
+                params: {
+                    query
+                }
+            })
+                .then(response => {
+                    dispatch(getSearchItemsSuccess(response.data.results, query));
+                })
+                .catch(error => {
+                    //TODO: handle the error when implemented
+                })
+        } else {
+            dispatch(getSearchItemsSuccess([], query))
+        }
     }
 };

@@ -4,11 +4,16 @@ import { fetchingState } from '../../common/fetchingHelper';
 
 const initialState = {
     topRatedMoviesStatus: {
-        data: null,
+        data: [],
         ...fetchingState,
     },
     getRecommendationsStatus: {
-        data: null,
+        data: [],
+        ...fetchingState,
+    },
+    searchItemsStatus: {
+        data: [],
+        query: '',
         ...fetchingState,
     },
 };
@@ -55,6 +60,27 @@ const executeGetRecommendationsSuccess = (state, action) => {
         }
     }
 };
+const executeGetSearchItemsFetching = state => {
+    return {
+        ...state,
+        searchItemsStatus: {
+            ...state.searchItemsStatus.data,
+             isFetching: true,
+             isFetched: false,
+         }
+    }
+};
+const executeGetSearchItemsSuccess = (state, action) => {
+    return {
+        ...state,
+        searchItemsStatus: {
+            isFetched: true,
+            data: action.data,
+            isFetching: false,
+            query: action.query,
+        }
+    }
+};
 
 const moviesReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -66,6 +92,10 @@ const moviesReducer = (state = initialState, action) => {
             return executeGetRecommendationsFetching(state);
         case actionTypes.GET_RECOMMENDATIONS_SUCCESS:
             return executeGetRecommendationsSuccess(state, action);
+        case actionTypes.GET_SEARCH_FETCHING:
+            return executeGetSearchItemsFetching(state);
+        case actionTypes.GET_SEARCH_SUCCESS:
+            return executeGetSearchItemsSuccess(state, action);
         default:
             return state;
     }
