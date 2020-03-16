@@ -14,13 +14,13 @@ const ContentLoader = () => {
     const classes = useStyles();
     return (
         <>
-            <Grid item xs='12' md='4' lg='3' className={classes.item}>
+            <Grid item xs= {12} md= {4} lg= {3} className={classes.item}>
                 <Skeleton variant="rect" width={'100%'} height={200} />
             </Grid>
-            <Grid item xs='12' md='4' lg='3' className={classes.item}>
+            <Grid item xs= {12} md= {4} lg= {3} className={classes.item}>
                 <Skeleton variant="rect" width={'100%'} height={200} />
             </Grid>
-            <Grid item xs='12' md='4' lg='3' className={classes.item}>
+            <Grid item xs= {12} md= {4} lg= {3} className={classes.item}>
                 <Skeleton variant="rect" width={'100%'} height={200} />
             </Grid>
         </>
